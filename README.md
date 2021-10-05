@@ -3,7 +3,8 @@
 Communicating between processes using just *signal* (a signal is an asynchronous notification sent to processes with the purpose of notifying the occurrence of an event. As an example, when you press the Ctrl+C key, a SIGINT is sent to the script and as per defined default action script terminates.)
 
 To represent each character we will need to send 8 signals. With that we convert ASCII character to Bynary character.
-![image](https://user-images.githubusercontent.com/62228465/134787970-25399ece-10fd-4ae3-b45d-184594b38df2.png)
+![Minitalk - Página 2](https://user-images.githubusercontent.com/62228465/135943232-3f277094-3a8c-41f4-aa01-c6ed24d1e366.jpeg)
+
 
 ### Server:
 >A process that waits passively for request from clients, processes the work specified, and return the result to the client that originated the request
