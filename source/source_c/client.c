@@ -6,19 +6,22 @@
 /*   By: smodesto <smodesto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 14:11:28 by smodesto          #+#    #+#             */
-/*   Updated: 2021/09/29 11:27:40 by smodesto         ###   ########.fr       */
+/*   Updated: 2021/10/04 21:48:16 by smodesto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minitalk.h"
 
-static void sucess(int sig)
+static void	sucess(int sig)
 {
 	if (sig == SIGUSR2)
-		ft_printf("Data has been received with signal %d\n", sig);
+	{
+		write(1, "Data has been received\n", 24);
+		exit (0);
+	}
 }
 
-static void send_signals(int pid, char c)
+static void	send_signals(int pid, unsigned int c)
 {
 	int	bits;
 
@@ -29,21 +32,16 @@ static void send_signals(int pid, char c)
 		{
 			if (kill(pid, SIGUSR1) == -1)
 				exit (1);
-			usleep(1000);
 		}
-		else
-		{
-			if (kill(pid, SIGUSR2) == -1)
-				exit (1);
-			usleep(1000);
-		}
+		else if (kill(pid, SIGUSR2) == -1)
+			exit (1);
+		usleep(800);
 		c /= 2;
 		bits++;
 	}
 }
 
-
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	int					pid;
 	char				*message;
@@ -53,7 +51,7 @@ int main(int argc, char *argv[])
 	sa.sa_handler = sucess;
 	if (argc != 3)
 	{
-		ft_printf("Client: invalid arguments. Try ./client <pid> <\"str>\"\n");
+		write(1, "Client: invalid arguments. Try ./client <pid> <\"str\">", 54);
 		exit (1);
 	}
 	pid = ft_atoi(argv[1]);
